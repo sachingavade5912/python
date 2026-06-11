@@ -7,17 +7,24 @@ def calculator(user_input):
 
     match operation:
         case "addition":
-            print(num1 + num2)
+            sum = num1 + num2
+            return sum
 
         case "subtraction":
             if num2 > num1:
                 print("Number 2 is greater than Number 1; cannot perform subtraction")
             else:
-                print(num1 - num2)
+                sub = num1 - num2
+                return sub
+
         case "multiplication":
-            print(num1 * num2)
+            mul = num1 * num2
+            return mul
+
         case "division":
-            print(num1 * num2)
+            div = num1 / num2
+            return div
+
         case _:
             print("Invalid operation selection")
         
@@ -26,7 +33,8 @@ while True:
     input_operation = input("\nPlease enter a operation to perform: ")
     if input_operation.lower() == "quit":
         break
-    calculator(input_operation)
+    result = calculator(input_operation)
+    print(result)
 
 
 
