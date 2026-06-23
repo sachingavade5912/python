@@ -54,14 +54,20 @@ def createJira():
     "update": {}
     } )
 
-    response = requests.request(
-    "POST",
-    url,
-    data=payload,
-    headers=headers,
-    auth=auth
-    )
+    github_payload = request.json # Reading incoming GitHub webhook
+    comment_body = github_payload["comment"]["body"]
+    if comment_body == "/jira":
+        response = requests.request(
+        "POST",
+        url,
+        data=payload,
+        headers=headers,
+        auth=auth
+        )
 
-    return json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": "))
+        return json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": "))
 
+    else:
+        return "Enter a valid comment to create a Jira issue, accepted comment is /jira"
+    
 app.run('0.0.0.0')
