@@ -5,13 +5,13 @@ import json
 
 app = Flask(__name__) # Creating a flask application instance
 
-@app.route("/createJira", method=['POST'])
+@app.route("/createJira", methods=['POST'])
 def createJira():
     # This code sample uses the 'requests' library:
     # http://docs.python-requests.org
 
-
-    API_TOKEN="ENTER YOUR API TOKEN HERE"
+    # This is some random API_TOKEN
+    API_TOKEN="ATATM2qI2OOvky3oVC0rk-6oaexkZKVDQJUC9xClaSVE-vn7YRNjPeEfCHLa-N8N7gZuHvjoHY1By4ZrnFeXT4tEXgQToegO8DrvgaT7GPZSIGyfvlyuMAO-5Qkzm8GquTuRUe8S6goGsFfyO9mUuJP9E91FT2uAgw=75EF1126"
 
     url = "https://sachingavade5912.atlassian.net/rest/api/3/issue"
 
@@ -56,7 +56,7 @@ def createJira():
 
     github_payload = request.json # Reading incoming GitHub webhook
     comment_body = github_payload["comment"]["body"]
-    if comment_body == "/jira":
+    if comment_body.strip() == "/jira":
         response = requests.request(
         "POST",
         url,
@@ -70,4 +70,4 @@ def createJira():
     else:
         return "Enter a valid comment to create a Jira issue, accepted comment is /jira"
     
-app.run('0.0.0.0')
+app.run('0.0.0.0', port=5000)
